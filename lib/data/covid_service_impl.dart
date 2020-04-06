@@ -45,4 +45,19 @@ class CovidServiceImpl implements CovidService {
     throw Exception(
         '[Service] error getHistoricalData. ${response.statusCode}');
   }
+
+  @override
+  Future<List<TotalData>> getListTotalData(String url) async {
+    final response = await _httpClient.get(url);
+    if (response.statusCode == 200) {
+      final bodyMapList = json.decode(response.body) as List;
+      final list = List<TotalData>();
+      bodyMapList.forEach((bodyMap) {
+        list.add(TotalData.fromMap(bodyMap));
+      });
+      debugPrint('===> ListTotalData: $bodyMapList');
+      return list;
+    }
+    throw Exception('[Service] error getTotalData. ${response.statusCode}');
+  }
 }

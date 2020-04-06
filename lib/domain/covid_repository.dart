@@ -5,4 +5,5 @@ import 'package:covid19_repository/model/total_data.dart';
 abstract class CovidRepository extends Repository {
   Future<TotalData> getTotalData(String url);
   Future<HistoricalData> getHistoricalData(String url);
+  Future<List<TotalData>> getListTotalData(String url);
 }

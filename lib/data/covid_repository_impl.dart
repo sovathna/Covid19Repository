@@ -14,4 +14,8 @@ class CovidRepositoryImpl implements CovidRepository {
   @override
   Future<HistoricalData> getHistoricalData(String url) =>
       _service.getHistoricalData(url);
+
+  @override
+  Future<List<TotalData>> getListTotalData(String url) =>
+      _service.getListTotalData(url);
 }
