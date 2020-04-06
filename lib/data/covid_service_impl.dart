@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:covid19_repository/domain/covid_service.dart';
 import 'package:covid19_repository/model/historical_data.dart';
 import 'package:covid19_repository/model/total_data.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class CovidServiceImpl implements CovidService {
@@ -16,7 +15,7 @@ class CovidServiceImpl implements CovidService {
     final response = await _httpClient.get(url);
     if (response.statusCode == 200) {
       final bodyMap = json.decode(response.body);
-      debugPrint('===> TotalData: $bodyMap');
+      // debugPrint('===> TotalData: $bodyMap');
       return TotalData.fromMap(bodyMap);
     }
     throw Exception('[Service] error getTotalData. ${response.statusCode}');
@@ -55,7 +54,7 @@ class CovidServiceImpl implements CovidService {
       bodyMapList.forEach((bodyMap) {
         list.add(TotalData.fromMap(bodyMap));
       });
-      debugPrint('===> ListTotalData: $bodyMapList');
+      // debugPrint('===> ListTotalData: $bodyMapList');
       return list;
     }
     throw Exception('[Service] error getTotalData. ${response.statusCode}');
