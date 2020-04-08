@@ -15,6 +15,8 @@ class TotalData extends Equatable {
   final int affectedCountries;
   final double casesPerOneMillion;
   final double deathsPerOneMillion;
+  final int tests;
+  final double testsPerOneMillion;
   final CountryInfo countryInfo;
 
   const TotalData({
@@ -30,6 +32,8 @@ class TotalData extends Equatable {
     this.affectedCountries,
     this.casesPerOneMillion,
     this.deathsPerOneMillion,
+    this.tests,
+    this.testsPerOneMillion,
     this.countryInfo,
   });
 
@@ -47,12 +51,19 @@ class TotalData extends Equatable {
         affectedCountries: tmp.containsKey('affectedCountries')
             ? tmp['affectedCountries']
             : null,
-        casesPerOneMillion: double.parse(tmp['casesPerOneMillion'] == null
-            ? '0'
-            : tmp['casesPerOneMillion'].toString()),
-        deathsPerOneMillion: double.parse(tmp['deathsPerOneMillion'] == null
-            ? '0'
-            : tmp['deathsPerOneMillion'].toString()),
+        casesPerOneMillion: (tmp.containsKey('casesPerOneMillion')
+                ? tmp['casesPerOneMillion'] ?? 0.0
+                : 0.0)
+            .toDouble(),
+        deathsPerOneMillion: (tmp.containsKey('deathsPerOneMillion')
+                ? tmp['deathsPerOneMillion'] ?? 0.0
+                : 0.0)
+            .toDouble(),
+        tests: tmp['test'] ?? 0,
+        testsPerOneMillion: (tmp.containsKey('testsPerOneMillion')
+                ? tmp['testsPerOneMillion'] ?? 0.0
+                : 0.0)
+            .toDouble(),
         countryInfo: tmp.containsKey('countryInfo')
             ? CountryInfo(
                 id: tmp['countryInfo']['_id'],
@@ -79,6 +90,8 @@ class TotalData extends Equatable {
         affectedCountries,
         casesPerOneMillion,
         deathsPerOneMillion,
+        tests,
+        testsPerOneMillion,
       ];
 }
 
