@@ -59,7 +59,7 @@ class TotalData extends Equatable {
                 ? tmp['deathsPerOneMillion'] ?? 0.0
                 : 0.0)
             .toDouble(),
-        tests: tmp['test'] ?? 0,
+        tests: tmp['tests'] ?? 0,
         testsPerOneMillion: (tmp.containsKey('testsPerOneMillion')
                 ? tmp['testsPerOneMillion'] ?? 0.0
                 : 0.0)
