@@ -1,7 +1,7 @@
 import 'package:covid19_repository/domain/covid_repository.dart';
 import 'package:covid19_repository/domain/covid_service.dart';
-import 'package:covid19_repository/model/historical_data.dart';
-import 'package:covid19_repository/model/total_data.dart';
+import 'package:covid19_repository/model/history.dart';
+import 'package:covid19_repository/model/total.dart';
 
 class CovidRepositoryImpl implements CovidRepository {
   final CovidService _service;
@@ -9,13 +9,12 @@ class CovidRepositoryImpl implements CovidRepository {
   const CovidRepositoryImpl(this._service);
 
   @override
-  Future<TotalData> getTotalData(String url) => _service.getTotalData(url);
+  Future<Total> getTotal(String url) => _service.getTotal(url);
 
   @override
-  Future<HistoricalData> getHistoricalData(String url) =>
-      _service.getHistoricalData(url);
+  Future<History> getHistory(String url) => _service.getHistory(url);
 
   @override
-  Future<List<TotalData>> getListTotalData(String url) =>
-      _service.getListTotalData(url);
+  Future<List<Total>> getCountryList(String url) =>
+      _service.getCountryList(url);
 }

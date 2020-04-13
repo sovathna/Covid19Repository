@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:covid19_repository/domain/covid_service.dart';
-import 'package:covid19_repository/model/historical_data.dart';
-import 'package:covid19_repository/model/total_data.dart';
+import 'package:covid19_repository/model/history.dart';
+import 'package:covid19_repository/model/total.dart';
 import 'package:http/http.dart' as http;
 
 class CovidServiceImpl implements CovidService {
@@ -11,18 +11,18 @@ class CovidServiceImpl implements CovidService {
   const CovidServiceImpl(this._httpClient);
 
   @override
-  Future<TotalData> getTotalData(String url) async {
+  Future<Total> getTotal(String url) async {
     final response = await _httpClient.get(url);
     if (response.statusCode == 200) {
       final bodyMap = json.decode(response.body);
-      // debugPrint('===> TotalData: $bodyMap');
-      return TotalData.fromMap(bodyMap);
+      // debugPrint('===> Total: $bodyMap');
+      return Total.fromMap(bodyMap);
     }
-    throw Exception('[Service] error getTotalData. ${response.statusCode}');
+    throw Exception('[Service] error getTotal. ${response.statusCode}');
   }
 
   @override
-  Future<HistoricalData> getHistoricalData(String url) async {
+  Future<History> getHistory(String url) async {
     final response = await _httpClient.get(url);
     if (response.statusCode == 200) {
       final bodyMap = json.decode(response.body) as Map<String, dynamic>;
@@ -39,24 +39,24 @@ class CovidServiceImpl implements CovidService {
         recovered.add(Case(date: key, value: recoveredMap[key]));
         deaths.add(Case(date: key, value: deathsMap[key]));
       });
-      return HistoricalData(cases: cases, recovered: recovered, deaths: deaths);
+      return History(cases: cases, recovered: recovered, deaths: deaths);
     }
     throw Exception(
         '[Service] error getHistoricalData. ${response.statusCode}');
   }
 
   @override
-  Future<List<TotalData>> getListTotalData(String url) async {
+  Future<List<Total>> getCountryList(String url) async {
     final response = await _httpClient.get(url);
     if (response.statusCode == 200) {
       final bodyMapList = json.decode(response.body) as List;
-      final list = List<TotalData>();
+      final list = List<Total>();
       bodyMapList.forEach((bodyMap) {
-        list.add(TotalData.fromMap(bodyMap));
+        list.add(Total.fromMap(bodyMap));
       });
-      // debugPrint('===> ListTotalData: $bodyMapList');
+      // debugPrint('===> ListTotal: $bodyMapList');
       return list;
     }
-    throw Exception('[Service] error getTotalData. ${response.statusCode}');
+    throw Exception('[Service] error getTotal. ${response.statusCode}');
   }
 }

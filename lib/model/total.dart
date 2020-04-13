@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class TotalData extends Equatable {
+class Total extends Equatable {
   final String country;
   final int cases;
   final int active;
@@ -11,15 +11,15 @@ class TotalData extends Equatable {
   final int todayDeaths;
   final int recovered;
   final int critical;
-  final double updated;
+  final num updated;
   final int affectedCountries;
-  final double casesPerOneMillion;
-  final double deathsPerOneMillion;
+  final num casesPerOneMillion;
+  final num deathsPerOneMillion;
   final int tests;
-  final double testsPerOneMillion;
+  final num testsPerOneMillion;
   final CountryInfo countryInfo;
 
-  const TotalData({
+  const Total({
     this.country,
     this.cases,
     this.active,
@@ -37,8 +37,8 @@ class TotalData extends Equatable {
     this.countryInfo,
   });
 
-  static TotalData fromMap(Map<String, dynamic> tmp) {
-    return TotalData(
+  static Total fromMap(Map<String, dynamic> tmp) {
+    return Total(
         country: tmp.containsKey('country') ? tmp['country'] : null,
         cases: tmp['cases'],
         active: tmp['active'],
@@ -51,26 +51,23 @@ class TotalData extends Equatable {
         affectedCountries: tmp.containsKey('affectedCountries')
             ? tmp['affectedCountries']
             : null,
-        casesPerOneMillion: (tmp.containsKey('casesPerOneMillion')
-                ? tmp['casesPerOneMillion'] ?? 0.0
-                : 0.0)
-            .toDouble(),
-        deathsPerOneMillion: (tmp.containsKey('deathsPerOneMillion')
-                ? tmp['deathsPerOneMillion'] ?? 0.0
-                : 0.0)
-            .toDouble(),
+        casesPerOneMillion: tmp.containsKey('casesPerOneMillion')
+            ? tmp['casesPerOneMillion']
+            : 0.0.toDouble(),
+        deathsPerOneMillion: tmp.containsKey('deathsPerOneMillion')
+            ? tmp['deathsPerOneMillion']
+            : 0.0,
         tests: tmp['tests'] ?? 0,
-        testsPerOneMillion: (tmp.containsKey('testsPerOneMillion')
-                ? tmp['testsPerOneMillion'] ?? 0.0
-                : 0.0)
-            .toDouble(),
+        testsPerOneMillion: tmp.containsKey('testsPerOneMillion')
+            ? tmp['testsPerOneMillion']
+            : 0.0,
         countryInfo: tmp.containsKey('countryInfo')
             ? CountryInfo(
                 id: tmp['countryInfo']['_id'],
                 iso2: tmp['countryInfo']['iso2'],
                 iso3: tmp['countryInfo']['iso3'],
-                lat: double.parse(tmp['countryInfo']['lat'].toString()),
-                long: double.parse(tmp['countryInfo']['long'].toString()),
+                lat: tmp['countryInfo']['lat'],
+                long: tmp['countryInfo']['long'],
                 flag: tmp['countryInfo']['flag'],
               )
             : null);
@@ -100,8 +97,8 @@ class CountryInfo extends Equatable {
   final int id;
   final String iso2;
   final String iso3;
-  final double lat;
-  final double long;
+  final num lat;
+  final num long;
   final String flag;
 
   const CountryInfo({

@@ -2,12 +2,12 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class HistoricalData extends Equatable {
+class History extends Equatable {
   final List<Case> cases;
   final List<Case> recovered;
   final List<Case> deaths;
 
-  const HistoricalData({this.cases, this.recovered, this.deaths});
+  const History({this.cases, this.recovered, this.deaths});
 
   @override
   List<Object> get props => [cases, recovered, deaths];

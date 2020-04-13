@@ -1,15 +1,15 @@
 import 'package:covid19_repository/base/event.dart';
 import 'package:meta/meta.dart';
 
-abstract class TotalDataEvent extends Event {
-  const TotalDataEvent();
+abstract class TotalEvent extends Event {
+  const TotalEvent();
 }
 
 @immutable
-class GetTotalDataEvent extends TotalDataEvent {
+class GetTotalEvent extends TotalEvent {
   final String country;
 
-  const GetTotalDataEvent({this.country});
+  const GetTotalEvent({this.country});
 
   @override
   List<Object> get props => [country];
